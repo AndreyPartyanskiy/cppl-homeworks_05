@@ -15,7 +15,6 @@ public:
             count_++;
             sum_ += x;
         }
-        std::cout << x << " ";
     }
     int get_sum() const { return sum_; }
     int get_count() const { return count_; }
@@ -25,9 +24,9 @@ int main() {
     MyFunctor count_elem;
 
     int my_list[] = { 4, 1, 3, 6, 25, 54 };
-    std::cout << "[IN]: ";
+    
     count_elem = std::for_each(my_list,my_list + sizeof(my_list) / sizeof(my_list[0]),count_elem);
-    std::cout << std::endl;
+    std::cout << "[IN]: "; for (int i : my_list) std::cout << i << " "; std::cout << std::endl;
     std::cout << "[OUT]: get_sum() = " << count_elem.get_sum() << "\n";
     std::cout << "[OUT]: get_count() = " << count_elem.get_count() << std::endl;
 

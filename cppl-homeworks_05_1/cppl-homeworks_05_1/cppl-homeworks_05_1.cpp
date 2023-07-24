@@ -4,27 +4,40 @@
 #include <vector>
 
 template <class T> 
-void my_sq (T a)
+T my_sq (T a)
 {
-    std::cout << "[IN]: " << a << std::endl;
-    std::cout << "[OUT]: " << a*a << std::endl;
+    return (a * a);  
 }
 
-template <>
-void my_sq(std::vector <int> abc)
+template <class T>
+T my_sq(std::vector <int>& abc)
 {
-    std::cout << "[IN]: "; 
-    for (int i : abc) std::cout << i << " ";
-    std::cout << std::endl;
-    std::cout << "[OUT]: ";
-    for (int i : abc) std::cout << i * i <<" ";
-    std::cout << std::endl;
+    for (int i = 0;i<abc.size();i++) abc[i] = abc[i] * abc[i];
+    return abc;
 }
 
 int main()
 {
-    my_sq(4);
-    std::vector <int> abc1 = { -1, 4, 8 };
-    my_sq(abc1);
+    int a = 5;
+    auto b =my_sq<int>(a);
+    std::cout << "[IN]: " << a << std::endl;
+    std::cout << "[OUT]: " << b << std::endl;
+
+    std::vector <int> abc = { -1, 4, 8 };
+    std::cout << "[IN]: ";
+    for (int i = 0; i < abc.size(); i++)
+    {
+        std::cout << abc[i];
+        if (i != abc.size() - 1) std::cout << ", ";
+    }
+    std::cout << std::endl;
+    auto abc_= my_sq<std::vector<int>>(abc);
+    std::cout << "[OUT]: ";
+    for (int i = 0; i < abc_.size(); i++)
+    {
+        std::cout << abc_[i];
+        if (i != abc_.size() - 1) std::cout <<", ";
+    }
+    std::cout << std::endl;
     return 0;
 }

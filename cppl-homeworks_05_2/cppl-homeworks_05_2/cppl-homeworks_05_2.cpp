@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <string>
+#include <utility>
+
 
 template <class T>
 class simply_array
@@ -25,9 +27,11 @@ public:
     {
         array_elements[in_num_col][in_num_row] = in_data;
     }
-    std::string Size() const
+    std::pair<int,int> Size() const
     {
-        return "col:" + std::to_string(num_col) + " row:" + std::to_string(num_row);
+        std::pair <int, int> p1(num_col,num_row);
+
+        return p1;
     }
     T get_element(int in_num_col,int in_num_row)
     {
@@ -44,11 +48,13 @@ public:
         std::cout << std::endl;
     }
 
-    int* operator[](const int i) {
+    int* operator[](const int i) 
+    {
 		return array_elements[i];
 	}
  
-    const int* operator[](const int i) const {
+    const int* operator[](const int i) const
+    {
         return array_elements[i];
     }
 
@@ -60,13 +66,14 @@ public:
 
 int main()
 {
+    
     auto test = simply_array <int> (2,3);
     test.set_element(0,0, 5);
     test.set_element(1,1, 15);
     
     test.print();
     test[0][0] = 4;
-    std::cout << test.Size() << "\n" << std::endl;
+    std::cout << "col: " << test.Size().first << " row: " << test.Size().second << "\n" << std::endl;
     std::cout << test[0][0] << std::endl;
 
     return 0;
